@@ -46,7 +46,7 @@ const AddNewTask = () => {
     return (
         <div className="mt-16 ml-5 mr-5 md:ml-40 md:mr-40">
             <div className="text-end">
-                <Link to={'/'}><button className="border-2 border-orange-500 p-3 w-72 rounded-md hover:bg-orange-500 hover:text-white transition-all">Wróc do wszystkich zadań</button></Link>
+                <Link to={'/'}><button className="border-2 border-amber-500 p-3 w-72 rounded-md hover:bg-amber-500 hover:text-white transition-all">Wróć do wszystkich zadań</button></Link>
             </div>
 
             <div className="text-center mt-16">
@@ -82,7 +82,7 @@ const AddNewTask = () => {
                 </div>
 
                 <div className="form flex pt-10 pb-10 pr-10 pl-10 justify-center">
-                    <button onClick={addTask} className="bg-orange-500 p-3 w-60 rounded-md text-white hover:bg-orange-700 transition-all ">Dodaj nowe zadanie</button>
+                    <button onClick={addTask} className="bg-amber-500 p-3 w-60 rounded-md text-white hover:bg-amber-700 transition-all ">Dodaj nowe zadanie</button>
                 </div>
 
                 <p className={"text-center text-red-500" + (!error ? " hidden" : "")}>Błąd dodawania na serwer...</p>
