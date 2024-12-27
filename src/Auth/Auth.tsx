@@ -1,4 +1,15 @@
+//Singleton pattern
 class Auth{
+
+    private static instance: Auth = null as unknown as Auth;
+
+    public static getInstance(): Auth{
+        if(this.instance === null){
+            this.instance = new Auth();
+        }
+        return Auth.instance;
+    }
+
     public logIn(username: string, password: string){
         return new Promise((resolve, reject) => {
             fetch(`http://localhost:3000/profiles?username=${username}`)
@@ -29,10 +40,10 @@ class Auth{
         })
     }
 
-    public signIn(user){
+    public signIn(user: User){
         return new Promise((resolve, reject) => {
             this.logIn(user.username, user.password)
-                .then((response) => {
+                .then(() => {
                 resolve({info: 'user already exists'});
 
             }).catch((reason) => {
@@ -76,33 +87,27 @@ class Auth{
         });
     }
 
-    public getTodayTasks(tasks: any){
+    public getTodayTasks(tasks: Task[]){
         return new Promise((resolve, reject) => {
             const todayDate = new Date();
             let day: string = String(todayDate.getDate());
             let month: string = String(todayDate.getMonth() + 1);
-            let year: number = todayDate.getFullYear();
+            const year: number = todayDate.getFullYear();
 
-            // @ts-ignore
-            if(day < 10){
+            if(Number(day) < 10){
                 day = "0" + day;
             }
 
-            // @ts-ignore
-            if(month < 10){
+            if(Number(month) < 10){
                 month = "0" + month;
             }
 
-            let date = day + "/" + month + "/" + year;
+            const date = day + "/" + month + "/" + year;
 
-            console.log(date);
 
 
             if(tasks !== null){
-                console.log(tasks);
-                // @ts-ignore
                 const todayTasks = tasks.filter((task) => task.expire === date && !task.done);
-                console.log(todayTasks);
                 resolve(todayTasks);
             }
             else{
@@ -112,7 +117,7 @@ class Auth{
 
     }
 
-    public addTask(task: any){
+    public addTask(task: Task){
         return new Promise((resolve, reject) => {
             fetch('http://localhost:3000/tasks', {
                 method: "post",
@@ -145,5 +150,18 @@ class Auth{
 
 }
 
-const auth = new Auth();
-export default auth;
+interface User{
+    username: string,
+    password: string
+}
+
+interface Task{
+    id: number,
+    user_id: number,
+    title: string,
+    description: string,
+    expire: string,
+    done: boolean
+}
+
+export default Auth;
