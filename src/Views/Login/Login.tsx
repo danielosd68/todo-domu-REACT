@@ -44,7 +44,7 @@ const LoginPage = (props: any) => {
 
             </div>
             <div className="socials w-full h-7 flex justify-center align-middle ml-auto mr-auto mb-5">
-                <a href="https://github.com" className="block ml-3 mr-2 w-7"><img src="/github.svg" alt="Hello!" className=""/></a>
+                <a href="https://github.com/danielosd68" target="_blank" className="block ml-3 mr-2 w-7"><img src="/github.svg" alt="Hello!" className=""/></a>
                 <a href="https://facebook.com" className="block ml-3 mr-2 w-7"><img src="/facebook.svg" alt="Hello!" className=""/></a>
                 <a href="https://tiktok.com" className="block ml-3 mr-2 w-7"><img src="/tiktok.svg" alt="Hello!" className=""/></a>
 

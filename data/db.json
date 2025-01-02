@@ -20,5 +20,14 @@
       "id": 3
     }
   ],
-  "tasks": []
+  "tasks": [
+    {
+      "user_id": 1,
+      "title": "zadanie2",
+      "description": "aaa",
+      "expire": "02/01/2025",
+      "done": false,
+      "id": 1
+    }
+  ]
 }

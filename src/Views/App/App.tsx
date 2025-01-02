@@ -77,9 +77,9 @@ const App = (props: {logout: () => void}) => {
                 </div>
                 <h1 className="mb-10 mt-10 text-center text-3xl">Zadania na dzisiaj!</h1>
 
-                <div className={'columns-2 md:columns-5 gap-5 gap-y-2 h-max'}>
+                <div className={'columns-1 lg:columns-3 gap-5 gap-y-2 h-max'}>
                     {todayTasks && todayTasks.length > 0 ? todayTasks.map((task: Task, id: number) => (
-                        <div key={id} className={"w-full break-inside-avoid p-5 m-2 break-words border-[1px] border-gray-200 rounded-md"}>
+                        <div key={id} className={"break-inside-avoid p-5 m-2 break-words border-[1px] border-gray-200 rounded-md"}>
                             <h2 className="text-xl text-wrap">{task.title}</h2>
                             <p className="">Opis: {task.description}</p>
                             <p className="">Data ważności: {task.expire}</p>
@@ -90,35 +90,43 @@ const App = (props: {logout: () => void}) => {
                 <p className={!(todayTasks === null || todayTasks.length === 0) ? "hidden" : "text-center text-gray-400"}>Brak zadań na dzisiaj!</p>
 
                 <h1 className="mt-10 mb-10 text-center text-3xl">Wszystkie zadania</h1>
-                <table className={"table-fixed w-full rounded-md text-xs md:text-sm" + (tasks === null ? " hidden" : "")}>
-                <thead>
-                    {tasks && tasks.length > 0 && (
-                        <tr className="h-14 bg-gray-200">
-                        <th>ID</th>
-                        <th>Tytuł</th>
-                        <th>Opis</th>
-                        <th>Termin</th>
-                        <th>Akcje</th>
-                    </tr>
-                    )}
-                    </thead>
-                    {tasks && tasks.length > 0 ? tasks.map((task: Task, id: number) => (
-                        
-                        <tr key={id} className={"h-12 border-t-2 break-words border-t-gray-200 hover:bg-gray-300" + (task.done ? " opacity-25" : "")}>
-                            <td className="pl-5 pr-5">{id + 1}</td>
-                            <td className="pl-5 pr-5 h-fit">{task.title}</td>
-                            <td className="pl-5 pr-5 h-fit">{task.description}</td>
-                            <td className="pl-5 pr-5">{task.expire}</td>
-                            <td className="pl-5 pr-5 text-center md:text-xl">
-                                <p onClick={() => {auth.removeTask(task.id); setRefresh(true)}} className="text-red-500 p-2 rounded-md my-2 text-[13px] cursor-pointer">Usuń</p>
-                            </td>
-                        </tr>
-                    )) : (
-                        <tr>
-                            <td colSpan={5} className={"h-12 text-center text-gray-400"}>Brak zadań!</td>
-                        </tr>
-                    )}
-                </table>
+                <div className={'relative overflow-x-auto'}>
+                    <table
+                        className={"w-full rounded-md text-xs md:text-sm" + (tasks === null ? " hidden" : "")}>
+                        <thead>
+                        {tasks && tasks.length > 0 && (
+                            <tr className="h-14 bg-gray-200">
+                                <th>ID</th>
+                                <th>Tytuł</th>
+                                <th>Opis</th>
+                                <th>Termin</th>
+                                <th>Akcje</th>
+                            </tr>
+                        )}
+                        </thead>
+                        {tasks && tasks.length > 0 ? tasks.map((task: Task, id: number) => (
+
+                            <tr key={id}
+                                className={"h-12 border-t-2 break-words border-t-gray-200 hover:bg-gray-300" + (task.done ? " opacity-25" : "")}>
+                                <td className="pl-5 pr-5">{id + 1}</td>
+                                <td className="pl-5 pr-5 h-fit">{task.title}</td>
+                                <td className="pl-5 pr-5 h-fit">{task.description}</td>
+                                <td className="pl-5 pr-5">{task.expire}</td>
+                                <td className="pl-5 pr-5 text-center md:text-xl">
+                                    <p onClick={() => {
+                                        auth.removeTask(task.id);
+                                        setRefresh(true)
+                                    }} className="text-red-500 p-2 rounded-md my-2 text-[13px] cursor-pointer">Usuń</p>
+                                </td>
+                            </tr>
+                        )) : (
+                            <tr>
+                                <td colSpan={5} className={"h-12 text-center text-gray-400"}>Brak zadań!</td>
+                            </tr>
+                        )}
+                    </table>
+
+                </div>
             </div>
             <p className="text-center mt-16 text-gray-400">&copy; Chyliński Daniel {new Date().getFullYear()}</p>
         </>
