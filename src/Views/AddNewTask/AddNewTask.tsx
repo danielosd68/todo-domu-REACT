@@ -1,9 +1,11 @@
 import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import auth from "../../Auth/Auth.tsx";
+import Auth from "../../Auth/Auth.tsx";
 
 const AddNewTask = () => {
     const navigate = useNavigate();
+    const auth = Auth.getInstance();
+
     document.title = "Dodaj nowe zadanie! | TODO - Domu 🏠";
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
@@ -28,7 +30,7 @@ const AddNewTask = () => {
         console.log(expireDate);
 
         const task = {
-            user_id: localStorage.getItem('id'),
+            user_id: Number(localStorage.getItem('id')) ?? 0,
             title: title,
             description: content,
             expire: expireDate,

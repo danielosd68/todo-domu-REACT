@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
 import Login from "./Login/Login.tsx";
 import App from "./App/App.tsx";
-import auth from "../Auth/Auth.tsx";
+import Auth from "../Auth/Auth.tsx";
 
 const Index = () => {
     const [type, setType] = useState("login");
     const [loginError, setLoginError] = useState(false);
+    const auth = Auth.getInstance();
     const login = (username: string, password: string) => {
         auth.logIn(username, password)
             .then(() => {

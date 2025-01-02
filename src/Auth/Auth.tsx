@@ -117,7 +117,7 @@ class Auth{
 
     }
 
-    public addTask(task: Task){
+    public addTask(task: Omit<Task, "id">){
         return new Promise((resolve, reject) => {
             fetch('http://localhost:3000/tasks', {
                 method: "post",
@@ -131,31 +131,27 @@ class Auth{
         })
     }
 
-    public setTaskAsDone(id: number){
+    public removeTask(id: number){
         return new Promise((resolve, reject) => {
-            fetch(`http://localhost:3000/tasks/${id}`, {
-                method: "PUT",
-                body: JSON.stringify({
-
-                })
+            fetch('http://localhost:3000/tasks/' + id, {
+                method: "delete",
+                headers: {
+                    "Content-Type": "application/json"
+                }
             })
-                .then((response) => {
-                    resolve(response);
-                })
-                .catch((reason) => {
-                    reject(reason);
-                })
+                .then((response) => resolve(response))
+                .catch((reason) => reject(reason));
         })
     }
 
 }
 
-interface User{
+export interface User{
     username: string,
     password: string
 }
 
-interface Task{
+export interface Task{
     id: number,
     user_id: number,
     title: string,
